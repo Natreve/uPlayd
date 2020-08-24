@@ -1,0 +1,48 @@
+.player {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    .video {
+        width: 100%;
+
+    }
+
+    .controls {
+        display: flex;
+        position: absolute;
+        bottom: 7px;
+        width: 100%;
+        background: rgba($color: #333333, $alpha: .64);
+        align-items: center;
+
+        // transform: translateY(100%);
+
+        .timeline {
+            height: 10px;
+            flex-grow: 2;
+            background-color: #C4C4C4;
+
+            .progress {
+                height: 10px;
+                width: 50%;
+                background-color: #FE3255;
+            }
+
+        }
+
+        .buttons {
+            padding: 10px;
+            font-size: 12px;
+
+            button {
+                background: none;
+                border: 0;
+                outline: 0;
+                cursor: pointer;
+                color: #E0E0E0
+            }
+
+        }
+    }
+}
