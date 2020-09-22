@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { PureComponent } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faPlay,
@@ -12,17 +12,22 @@ import {
   faExpand,
 } from "@fortawesome/free-solid-svg-icons"
 import css from "./css.module.scss"
-
-export default class VideoPlayer extends Component {
+export class VideoPlayer extends PureComponent {
   constructor(props) {
     super(props)
     this.video = React.createRef()
+    this.state = {
+      source: null,
+      paused: faPlay,
+      player: null,
+      progress: 0,
+      timestamp: 0,
+      duration: 0,
+    }
   }
-  state = {
-    paused: faPlay,
-    player: null,
-    progress: 0,
-    timestamp: 0,
+  changeSource(source) {
+    this.setState({ source: source })
+    this.video.current.load()
   }
   togglePlayPause() {
     const { player } = this.state
@@ -34,36 +39,68 @@ export default class VideoPlayer extends Component {
       this.setState({ paused: faPlay })
     }
   }
-  scrub(e) {
+  scrub() {
     const video = this.video.current
-    const timeline = document.querySelector(`.${css.timeline}`)
-    const scrubTime =
-      (e.nativeEvent.offsetX / timeline.offsetWidth) * video.duration
-    video.currentTime = scrubTime
+    if (!video.duration) return
+    const input = document.querySelector(`input[type="range"]`)
+
+    input.style.background =
+      "linear-gradient(to right, #FE3255 0%, #FE3255 " +
+      input.value +
+      "%, #fff " +
+      input.value +
+      "%, white 100%)"
+
+    video.currentTime = video.duration * (input.value / 100)
+    this.setState({ progress: input.value })
   }
   skip(seconds) {
-    console.log(seconds)
     const video = this.video.current
     video.currentTime += seconds
   }
+  seekTimeUpdate() {
+    const video = this.video.current
+
+    let progress = video.currentTime * (100 / video.duration)
+    let currentMins = Math.floor(video.currentTime / 60)
+    let currentSecs = Math.floor(video.currentTime - currentMins * 60)
+    let durationMins = Math.floor(video.duration / 60)
+    let durationSecs = Math.floor(video.duration - durationMins * 60)
+    if (!durationMins) durationMins = 0
+    if (!durationSecs) durationSecs = 0
+    if (currentSecs < 10) currentSecs = `0${currentSecs}`
+    if (durationSecs < 10) durationSecs = `0${durationSecs}`
+    if (currentMins < 10) currentMins = `0${currentMins}`
+    if (durationMins < 10) durationMins = `0${durationMins}`
+    this.setState({
+      progress: progress,
+      timeStamp: `${currentMins}:${currentSecs}/${durationMins}:${durationSecs}`,
+    })
+  }
   componentDidMount() {
-    this.setState({ player: this.video.current })
+    this.setState({ player: this.video.current }, () => {
+      this.video.current.load()
+    })
+    this.video.current.onloadedmetadata = () => {
+      this.setState({ duration: this.video.current.duration })
+      this.seekTimeUpdate()
+    }
     this.video.current.addEventListener("timeupdate", () => {
-      const video = this.video.current
-      this.setState({ progress: video.currentTime / video.duration })
+      this.seekTimeUpdate()
     })
   }
   render() {
-    const { paused, progress } = this.state
+    const { paused, progress, source, timeStamp } = this.state
+
     return (
       <div className={css.player}>
         <video className={css.video} ref={this.video}>
-          <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"></source>
+          <source src={source}></source>
           <track kind="captions"></track>
           Sorry, your browser doesn't support embedded videos.
         </video>
         <div className={css.controls}>
-          <div className={css.timeStamp}></div>
+          <div className={css.timeStamp}>{timeStamp}</div>
           <div className={css.buttons}>
             <button
               className={css.skipBackwards}
@@ -84,13 +121,23 @@ export default class VideoPlayer extends Component {
               <FontAwesomeIcon icon={faFastForward} />
             </button>
           </div>
-          <div className={css.timeline} onClick={e => this.scrub(e)}>
-            <div
-              className={css.progress}
-              style={{ width: `${progress * 100}%` }}
-            ></div>
-            <div className={css.pointer}></div>
-          </div>
+          <input
+            type="range"
+            min={0}
+            max={100}
+            value={progress || 0}
+            step={1}
+            style={{
+              background:
+                "linear-gradient(to right, #FE3255 0%, #FE3255 " +
+                progress +
+                "%, #fff " +
+                progress +
+                "%, white 100%)",
+            }}
+            onChange={e => this.scrub()}
+          />
+
           <div className={css.buttons}>
             <button className={css.volumn}>
               <FontAwesomeIcon icon={faVolumeUp} />
@@ -107,103 +154,4 @@ export default class VideoPlayer extends Component {
     )
   }
 }
-
-// import React, { Component } from "react"
-// import { Player, ControlBar, BigPlayButton } from "video-react"
-// import "components/video-player/video-react.scss"
-// import Button from "components/buttons"
-// export default class VideoPlayer extends Component {
-//   constructor(props, context) {
-//     super(props, context)
-//     this.state = {
-//       source: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
-//     }
-//     this.play = this.play.bind(this)
-//     this.pause = this.pause.bind(this)
-//     this.load = this.load.bind(this)
-//     this.changeCurrentTime = this.changeCurrentTime.bind(this)
-//     this.seek = this.seek.bind(this)
-//     this.changeVolume = this.changeVolume.bind(this)
-//     this.setMuted = this.setMuted(this)
-//   }
-
-//   componentDidMount() {
-//     // subscribe state change
-//     this.player.subscribeToStateChange(this.handleStateChange.bind(this))
-//   }
-
-//   setMuted(muted) {
-//     return () => {
-//       this.player.muted = muted
-//     }
-//   }
-
-//   handleStateChange(state) {
-//     // copy player state to this component's state
-//     this.setState({
-//       player: state,
-//     })
-//   }
-
-//   play() {
-//     this.player.play()
-//   }
-
-//   pause() {
-//     this.player.pause()
-//   }
-
-//   load() {
-//     this.player.load()
-//   }
-
-//   changeCurrentTime(seconds) {
-//     return () => {
-//       const { player } = this.player.getState()
-//       this.player.seek(player.currentTime + seconds)
-//     }
-//   }
-
-//   seek(seconds) {
-//     return () => {
-//       this.player.seek(seconds)
-//     }
-//   }
-
-//   changePlaybackRateRate(steps) {
-//     return () => {
-//       const { player } = this.player.getState()
-//       this.player.playbackRate = player.playbackRate + steps
-//     }
-//   }
-
-//   changeVolume(steps) {
-//     return () => {
-//       const { player } = this.player.getState()
-//       this.player.volume = player.volume + steps
-//     }
-//   }
-
-//   changeSource(source) {
-//     this.setState({
-//       source: source,
-//     })
-//     this.player.load()
-//   }
-//   render() {
-//     return (
-//       <div >
-//         <Player
-//           ref={player => {
-//             this.player = player
-//             this.props.player(this)
-//           }}
-//         >
-//           <source src={this.state.source}></source>
-//           <BigPlayButton position="center" />
-//           <ControlBar autoHide={false} />
-//         </Player>
-//       </div>
-//     )
-//   }
-// }
+export default VideoPlayer

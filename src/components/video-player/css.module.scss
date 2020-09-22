@@ -17,16 +17,77 @@
         align-items: center;
 
         // transform: translateY(100%);
+        .timeStamp {
+            font-size: 12px;
+            color: #E0E0E0;
+            padding: 12px;
+            min-width: 10em;
+            max-width: 10em;
+        }
+
+        input {
+            -webkit-appearance: none;
+            height: 4px;
+            flex-grow: 2;
+            // background: #C4C4C4;
+            background: linear-gradient(to right, #FE3255 0%, #FE3255 0%, #fff 0%, #fff 100%);
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition:.2s;
+            transition: opacity .2s ;
+            transition: background 450ms ease-in;
+            border-radius: 2px;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 14px;
+                height: 14px;
+                background: #FE3255;
+                cursor: pointer;
+                border-radius: 50%;
+            }
+        }
 
         .timeline {
-            height: 10px;
+            height: 4px;
             flex-grow: 2;
             background-color: #C4C4C4;
+            border-radius: 2px;
+            position: relative;
 
             .progress {
-                height: 10px;
+                height: 100%;
                 width: 50%;
                 background-color: #FE3255;
+                border-radius: 2px;
+            }
+
+            .pointer {
+                position: absolute;
+                left: 0;
+                top: -5px;
+
+                .outerCircle {
+                    width: 14px;
+                    height: 14px;
+                    background: #FE3255;
+                    border-radius: 50%;
+
+                    .innerCircle {
+                        position: absolute;
+                        width: 6px;
+                        height: 6px;
+                        left: 30%;
+                        top: 30%;
+                        background: #E0E0E0;
+                        border-radius: 50%;
+                    }
+                }
             }
 
         }
