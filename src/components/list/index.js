@@ -65,8 +65,7 @@ const SortableList = props => {
       this.list.style.height = this.list.offsetHeight + "px"
 
       this.item.classList.add(css.isDragging)
-      
-      
+
       this.itemHeight = this.items[1]?.offsetTop
       this.listHeight = this.list.offsetHeight
       this.startTouchY = this.getDragY(e)
@@ -80,12 +79,12 @@ const SortableList = props => {
         item.style.left = 0
         item.style.width = "100%"
         item.style.transform = `translateY(${offsetsTop[index]}px)`
-        item.style.zIndex = item == this.item ? 2 : 1
+        item.style.zIndex = item === this.item ? 2 : 1
       })
 
       setTimeout(() => {
         this.items.forEach(item => {
-          if (this.item == item) return
+          if (this.item === item) return
           item.style.transition = `transform ${this.options.animationSpeed}ms ${this.options.animationEasing}`
         })
       })
@@ -95,7 +94,7 @@ const SortableList = props => {
         (this.startTop / this.listHeight) * this.items.length
       )
 
-      this.touch = e.type == "touchstart"
+      this.touch = e.type === "touchstart"
       window.addEventListener(
         this.touch ? "touchmove" : "mousemove",
         this.dragMove,
@@ -119,13 +118,13 @@ const SortableList = props => {
       this.item.style.transform = `translateY(${top}px)`
 
       this.positions.forEach(index => {
-        if (index == this.position || index != newPosition) return
+        if (index === this.position || index != newPosition) return
         this.swapElements(this.positions, this.position, index)
         this.position = index
       })
 
       this.items.forEach((item, index) => {
-        if (item == this.item) return
+        if (item === this.item) return
         item.style.transform = `translateY(${
           this.positions.indexOf(index) * this.itemHeight
         }px)`
