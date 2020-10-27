@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 const Test = () => {
-  if (typeof window !== "undefined") gapi = window.gapi
+  const gapi = typeof window !== "undefined" ? window.gapi : null
   // const [apiKey, setApiKey] = useState("")
   // const [clientId, setClientId]= useState("")
   const DISCOVERY_DOCS = [
@@ -28,11 +28,8 @@ const Test = () => {
     gapi.load("client:auth2", async () => {
       try {
         await gapi.client.init({
-          apiKey: "AIzaSyD9rWbKsR7jPHQO5YfGUwMWxHEUxGP9WUs",
-          clientId:
-            "100858574819-f6kcfu6bbkh6vi06jlofuvapc1mn3j9j.apps.googleusercontent.com",
-          // apiKey: apiKey,
-          // clientId: clientId,
+          apiKey: process.env.GATSBY_GOOGLE_DRIVE_API,
+          clientId: process.env.GATSBY_CLIENT_ID,
           dicvoeryDocs: DISCOVERY_DOCS,
           scope: SCOPES,
         })
@@ -54,6 +51,7 @@ const Test = () => {
     var textContent = document.createTextNode(message + "\n")
     pre.appendChild(textContent)
   }
+  console.log(process.env.GATSBY_GOOGLE_DRIVE_API)
   return (
     <div>
       <label htmlFor="clientID">
