@@ -25,10 +25,10 @@ const IndexPage = () => {
       </SortableList>
     </Layout>
   )
-  function onClick(file) {
-    console.log(file.source)
-    video.current.changeSource(file.source)
-  }
+  // function onClick(file) {
+  //   console.log(file.source)
+  //   video.current.changeSource(file.source)
+  // }
   function onUpload(file) {
     console.log(file)
     addSource([

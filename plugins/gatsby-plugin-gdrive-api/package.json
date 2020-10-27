@@ -1,0 +1,7 @@
+{
+  "name": "gatsby-plugin-gdrive-api",
+  "version": "1.0.0",
+  "description": "A Google Drive API plugin",
+  "main": "index.js",
+  "license": "MIT"
+}

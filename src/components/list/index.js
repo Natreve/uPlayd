@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import css from "./css.module.scss"
 
 const Item = props => {
   return (
     <div
+
       className={css.listItem}
       sortable-item="sortable-item"
       onClick={e => props.onClick(e)}
+      onKeyDown={() => {}}
     >
       <div className={css.listItemContent}>
         <div className={css.listItemTitle}>{props.title}</div>
@@ -118,7 +120,7 @@ const SortableList = props => {
       this.item.style.transform = `translateY(${top}px)`
 
       this.positions.forEach(index => {
-        if (index === this.position || index != newPosition) return
+        if (index === this.position || index !== newPosition) return
         this.swapElements(this.positions, this.position, index)
         this.position = index
       })
@@ -186,9 +188,7 @@ const SortableList = props => {
       return e.touches ? (e.touches[0] || e.changedTouches[0]).pageY : e.pageY
     }
   }
-  useEffect(() => {
-    const sortable = new Sortable(`.${css.list}`)
-  })
+  useEffect(() => new Sortable(`.${css.list}`))
   console.log("rendered")
   return (
     <div className={css.list} sortable-list="sortable-list">
