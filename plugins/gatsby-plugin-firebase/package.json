@@ -1,0 +1,19 @@
+{
+  "name": "gatsby-plugin-firebase",
+  "description": "A gatsby plugin that provides drop-in support for Firebase based on alexluong's gatsby-plugin-firebase",
+  "version": "1.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"No build script setup\""
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin"
+  ],
+  "author": "Andrew Gray <contact@andrewgray.dev>",
+  "license": "MIT",
+  "peerDependencies": {
+    "firebase": "^7.24.0"
+  }
+}

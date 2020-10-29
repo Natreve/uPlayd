@@ -4,7 +4,6 @@ import css from "./css.module.scss"
 const Item = props => {
   return (
     <div
-
       className={css.listItem}
       sortable-item="sortable-item"
       onClick={e => props.onClick(e)}
@@ -188,8 +187,9 @@ const SortableList = props => {
       return e.touches ? (e.touches[0] || e.changedTouches[0]).pageY : e.pageY
     }
   }
-  useEffect(() => new Sortable(`.${css.list}`))
-  console.log("rendered")
+  useEffect(() => {
+    new Sortable(`.${css.list}`)
+  })
   return (
     <div className={css.list} sortable-list="sortable-list">
       {props.children}

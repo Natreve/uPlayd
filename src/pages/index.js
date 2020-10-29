@@ -1,47 +1,32 @@
-import React, { useState } from "react"
+import React from "react"
+import { Router } from "@reach/router"
+import { Context } from "services/Provider"
 
-import Layout from "components/layout"
-import VideoPlayer from "components/video-player"
-import SEO from "components/seo"
-import { SortableList, Item } from "components/list"
-import Button from "components/buttons"
-const IndexPage = () => {
-  const video = React.createRef()
-  const [sources, addSource] = useState([])
+import Login from "views/login"
+import Dashboard from "views/dashboard"
+import NotFound from "views/404"
+
+const App = () => {
+  
   return (
-    <Layout>
-      <SEO title="Home" />
-      <Button onUpload={file => onUpload(file)} />
-      <VideoPlayer ref={video} />
-      <SortableList>
-        {sources?.map((item, index) => (
-          <Item
-            key={index}
-            title={item.title}
-            description={item.description}
-            onClick={e => video.current.changeSource(item.source)}
-          />
-        ))}
-      </SortableList>
-    </Layout>
+    <Context.Consumer>
+      {context => {
+        if (!context) return <div>Setting up content...</div>
+        const {
+          state: { loading, user },
+        } = context
+        if (loading) return <div>Loading content...</div>
+        if (!user) return <Login path="login" />
+        return (
+          <Router basepath="/">
+            <Login path="login" />
+            <Dashboard path="/" context={context} />
+            <NotFound default />
+          </Router>
+        )
+      }}
+    </Context.Consumer>
   )
-  // function onClick(file) {
-  //   console.log(file.source)
-  //   video.current.changeSource(file.source)
-  // }
-  function onUpload(file) {
-    console.log(file)
-    addSource([
-      ...sources,
-      {
-        title: file.name,
-        description: "Aenean aliquam molestie urna, vel aliquam.",
-        source: file.source,
-      },
-    ])
-
-    // video.current.changeSource(file.source)
-  }
 }
 
-export default IndexPage
+export default App

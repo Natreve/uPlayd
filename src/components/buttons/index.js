@@ -18,11 +18,15 @@ const UploadButton = props => {
         capture="environment"
         onClick={element => {
           element.target.addEventListener("change", e => {
-            console.log()
-            let name = e.target.files[0].name
-            let video = URL.createObjectURL(e.target.files[0])
+            props.onUpload(e.target.files[0])
+            // let name = e.target.files[0].name
+            // let video = URL.createObjectURL(e.target.files[0])
 
-            props.onUpload({ name: name, source: video })
+            // props.onUpload({
+            //   name: name,
+            //   source: video,
+            //   raw: e.target.files[0],
+            // })
           })
         }}
       />
