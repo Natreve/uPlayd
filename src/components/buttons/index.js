@@ -10,7 +10,7 @@ const UploadButton = props => {
       tabIndex="0"
       onClick={e => e.stopPropagation()}
     >
-      <FontAwesomeIcon icon={faUpload} /> <span>upload</span>
+      <FontAwesomeIcon icon={faUpload} /> <span>UPLOAD</span>
       <input
         type="file"
         accept="video/*"
