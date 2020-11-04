@@ -52,7 +52,7 @@ const Navbox = styled.div`
     background-color: #fff;
     transition: all 0.3s ease-in;
     top: 8vh;
-    left: ${props => (props.open ? "-100%" : "0")};
+    left: ${props => (props.open ? "-100%" : "0")}; 
   }
 `
 
@@ -87,7 +87,7 @@ const Hamburger = styled.div`
     top: 10px;
   }
 `
-
+//props pointers needs to be added to header's index file
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
 

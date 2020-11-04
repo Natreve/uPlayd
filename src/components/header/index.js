@@ -2,6 +2,28 @@ import { Link } from "gatsby"
 import React, { useEffect } from "react"
 import css from "./css.module.scss"
 
+const Images = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      file(name: { eq: "uplayed" }, extension: { eq: "jpg" }) {
+        childImageSharp {
+          fixed(width: 150, height: 30) {
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
+      file(name: { eq: "avatar" }, extension: { eq: "png" }) {
+        childImageSharp {
+          fixed(width: 50, height: 50) {
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
+    }
+  `)
+
+}
+
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
 
@@ -28,21 +50,10 @@ const Navbar = () => {
 }
 
 const Logo = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      file(name: { eq: "uplayed" }, extension: { eq: "jpg" }) {
-        childImageSharp {
-          fixed(width: 150, height: 30) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
-    }
-  `)
   return (
 
     <LogoWrap as={Link} to="/">
-      <Img fixed={data.file.childImageSharp.fixed} alt="logo" />
+      <Img fixed={data.file.childImageSharp.fixed} alt="uplayed" />
     </LogoWrap>
   )
 }
@@ -58,17 +69,6 @@ const NavbarLinks = () => {
   )
 }
 const Avatar = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      file(name: { eq: "avatar" }, extension: { eq: "png" }) {
-        childImageSharp {
-          fixed(width: 50, height: 50) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
-    }
-  `)
   return (
       <AvatarWrap>
         <Img fixed={data.file.childImageSharp.fixed} alt="avatar"/>
@@ -76,4 +76,4 @@ const Avatar = () => {
   )
 }
 
-export {Navbar, Logo, NavbarLinks, Avatar} 
+export {Navbar, Logo, NavbarLinks, Avatar } 
