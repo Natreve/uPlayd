@@ -11,7 +11,6 @@ import { useStaticQuery, graphql } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFilm, faFutbol, faSortDown } from "@fortawesome/free-solid-svg-icons"
 import UploadButton from "components/buttons"
-import Logo from "components/logo"
 import Avatar from "components/avatar"
 import { NavBar, NavBarItem } from "components/navbar"
 import "./layout.css"
@@ -30,7 +29,6 @@ const Layout = ({ children }) => {
   return (
     <>
       <NavBar>
-        <Logo />
         <NavBarItem path="/">
           <FontAwesomeIcon icon={faFilm} style={{ marginRight: `10px` }} />
           Film <FontAwesomeIcon icon={faSortDown} />
