@@ -1,11 +1,12 @@
 import React, { useState } from "react"
 
 import Layout from "components/layout"
-import VideoPlayer from "components/video-player"
 import SEO from "components/seo"
-import { SortableList, Item } from "components/list"
-import Button from "components/buttons"
-import Auth from "../../services/Auth"
+import Seasons from "./Seasons"
+import ReactPlayer from 'react-player'
+import "./index.css";
+import Results from "./Results"
+
 const VideoEditor = ({ context }) => {
   const {
     state: { user },
@@ -56,19 +57,16 @@ const VideoEditor = ({ context }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <Button onUpload={file => onUpload(file)} />
-      <VideoPlayer ref={video} />
-      <SortableList>
-        {sources?.map((item, index) => (
-          <Item
-            key={index}
-            title={item.title}
-            description={item.description}
-            onClick={e => video.current.changeSource(item.source)}
-          />
-        ))}
-      </SortableList>
-      <button onClick={() => Auth.logout()}>Sign Out</button>
+      <div className="dashboard-wrapper">
+        <div className="db-row-1">
+          <Seasons />
+          <ReactPlayer url='https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4'
+            width="100%" height="50vh" controls={true} />
+        </div>
+        <div className="db-row-2">
+          <Results/>
+        </div>
+      </div>
     </Layout>
   )
   // function onClick(file) {

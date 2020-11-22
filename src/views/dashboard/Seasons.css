@@ -1,0 +1,17 @@
+.seasons-header {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  margin: 0 0 10px 0;
+}
+
+.seasons-wrapper {
+  background: #fe3255;
+  color: white;
+  padding: 20px;
+}
+
+.seasons-wrapper .bp3-icon {
+  color: white !important;
+}

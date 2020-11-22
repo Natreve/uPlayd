@@ -1,0 +1,30 @@
+.header-wrapper {
+  background-color: gray;
+}
+
+.upload-btn {
+  background: #fe3255 !important;
+  border-radius: 4px;
+  color: white !important;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.upload-btn .bp3-icon {
+  color: white !important;
+}
+
+.profile-image {
+  height: 30px;
+}
+
+.nav-right {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr 40px;
+  text-align: center;
+  column-gap: 20px;
+}
+
+body {
+  margin: 0;
+}

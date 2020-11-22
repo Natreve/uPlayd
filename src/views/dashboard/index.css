@@ -1,0 +1,13 @@
+.dashboard-wrapper {
+  display: grid;
+}
+
+.db-row-1 {
+  display: grid;
+  grid-template-columns: 450px calc(100% - 450px);
+}
+
+.db-row-1 video {
+  background-color: black;
+}
+
