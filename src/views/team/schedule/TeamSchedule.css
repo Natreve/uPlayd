@@ -1,0 +1,96 @@
+.ts-wrapper {
+  display: grid;
+  grid-template-rows: 64px auto;
+}
+
+.ts-content {
+  display: grid;
+  grid-template-columns: 250px auto;
+}
+
+.ts-sidebar {
+  background: #fe3255;
+}
+
+.ts-sidebar-seasons-head {
+  display: grid;
+  grid-template-columns: auto 30px;
+  line-height: 30px;
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.ts-sidebar-seasons-head .bp3-icon {
+  color: white;
+}
+
+.ts-sidebar-years-list {
+  padding-bottom: 10px;
+  color: white;
+  min-height: calc(100vh - 164px);
+  font-size: 16px;
+}
+
+.ts-sidebar-years-list .bp3-icon {
+  color: white !important;
+}
+
+.ts-sidebar-years-list .bp3-tree-node-content {
+  height: 48px;
+}
+
+.ts-sidebar-years-list
+  .bp3-tree-node.bp3-tree-node-selected
+  > .bp3-tree-node-content {
+  background: #db2b49;
+}
+
+.ts-teams-actions {
+  display: grid;
+  grid-template-columns: 200px auto auto;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  height: 50px;
+  line-height: 50px;
+}
+
+.ts-team-actions-year {
+  font-size: 24px;
+}
+
+.ts-team-actions-current {
+  color: #219653;
+}
+
+.ts-team-actions-buttons {
+  text-align: right;
+}
+
+.ts-team-actions-buttons .bp3-button {
+  color: #fe3255;
+  border: 1px solid #fe3255;
+}
+
+.team-row {
+  height: 64;
+  line-height: 64px;
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 1fr;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.team-row-selected {
+  background: #fadadf !important;
+  color: #fe3255;
+}
+
+.team-row:nth-of-type(odd) {
+  background-color: #f7f7f7;
+}
+
+.team-row img {
+  padding-top: 9px;
+}

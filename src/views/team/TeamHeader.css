@@ -1,0 +1,43 @@
+.team-header-wrapper {
+  display: grid;
+  grid-template-columns: 250px auto;
+  background: #fe3255;
+  height: 64px;
+  line-height: 64px;
+}
+
+.teams-header-actions {
+  text-align: center;
+}
+
+.teams-header-actions .bp3-button {
+  color: white;
+}
+
+.teams-header-actions .bp3-icon {
+  color: white;
+}
+
+.teams-header-actions .bp3-disabled {
+  color: rgba(255, 255, 255, 0.48) !important;
+}
+
+.team-selector {
+  height: 64px;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 48px auto 30px;
+  column-gap: 10px;
+  text-align: center;
+  color: white;
+  border: 1px solid white;
+}
+
+.team-selector .team-name {
+  font-size: 16px;
+  line-height: 48px;
+}
+
+.team-selector .bp3-icon {
+  color: white !important;
+}
