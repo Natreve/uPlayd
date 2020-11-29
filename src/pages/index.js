@@ -7,6 +7,8 @@ import Dashboard from "views/dashboard"
 import NotFound from "views/404"
 
 import "./blueprint.css"
+import TeamSchedule from "../views/team/schedule/TeamSchedule"
+import TeamManage from "../views/team/management/TeamManage"
 // import "./blueprint-icons.css"
 
 const App = () => {
@@ -24,6 +26,8 @@ const App = () => {
           <Router basepath="/">
             <Login path="login" />
             <Dashboard path="/" context={context} />
+            <TeamSchedule path="/teamschedule" />
+            <TeamManage path="/teammanage" />
             <NotFound default />
           </Router>
         )

@@ -1,0 +1,19 @@
+.tm-content .menu-bar {
+  grid-template-columns: auto auto;
+}
+
+.athletes-table {
+  width: 100%;
+}
+
+.athletes-table thead {
+  background-color: #e7e7e7;
+}
+
+.btn-add-member .bp3-button-text {
+  color: #fe3255 !important;
+}
+
+.btn-add-member .bp3-icon {
+  color: #fe3255 !important;
+}
